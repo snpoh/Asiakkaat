@@ -1,0 +1,11 @@
+table, th, td {
+  border: 1px solid black;
+  border-spacing: 5px;
+}
+
+
+th {
+  text-align: left;
+  background-color: #40f141;
+}
+
