@@ -15,30 +15,26 @@ import org.json.JSONObject;
 import model.Asiakas;
 import model.dao.Dao;
 
-/**
- * Servlet implementation class Asiakkaat
- */
-@WebServlet("/asiakkaat")
+
+@WebServlet("/asiakkaat/*")
 public class Asiakkaat extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public Asiakkaat() {
         super();
         System.out.println("Asiakkaat.Asiakkaat()");
-        // TODO Auto-generated constructor stub
+        
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Asiakkaat.doGet");
+		String pathInfo = request.getPathInfo();
+		System.out.println("polku:"+pathInfo);
+		String hakusana = pathInfo.replace("/", "");
 		Dao dao = new Dao();
-		ArrayList<Asiakas> asiakkaat = dao.listaaKaikki();
+		ArrayList<Asiakas> asiakkaat = dao.listaaKaikki(hakusana);
 		System.out.println(asiakkaat);
 		String strJSON = new JSONObject().put("asiakkaat", asiakkaat).toString();
 		response.setContentType("application/json");
